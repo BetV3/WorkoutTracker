@@ -1,7 +1,8 @@
 import React, { useState} from "react";
-
+import axios from 'axios';
 
 const AddWorkout = () => {
+    const [user_id, setUser_id] = useState('');
     const [exercise, setExercise] = useState('');
     const [sets, setSets] = useState("");
     const [reps, setReps] = useState("");

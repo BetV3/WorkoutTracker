@@ -8,7 +8,7 @@ import AddWorkout from './components/AddWorkout';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AddWorkout />
+    <App />
   </React.StrictMode>
 );
 
