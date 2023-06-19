@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/register' element={Registration}/>
+        <Route path='/' element={<Registration />}/>
         <Route
           exact
           path='/AddWorkout'
