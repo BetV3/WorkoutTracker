@@ -3,25 +3,28 @@ import axios from "axios";
 
 
 const Registration = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value});
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const registrationData = {
-            name,
-            email,
-            password
-        };
-
+        setIsLoading(true);
+        console.log(formData)
         try {
-            const response = await axios.post('/register', registrationData);
+            const response = await axios.post('http://10.0.1.108:3000/register', formData);
             console.log(response.data);
         } catch(err) {
             console.log(err);
         }
+        setIsLoading(false);
     };
 
     return (
@@ -30,17 +33,19 @@ const Registration = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} />
+                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
                 </label>
                 <label>
                     Email:
-                    <input type="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
                 </label>
                 <label>
                     Password:
-                    <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
+                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={isLoading}>
+                    {isLoading ? 'Loading...' : 'Register'}
+                </button>
             </form>
         </div>
     )
